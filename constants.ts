@@ -4,6 +4,7 @@ import fastifyCors from "fastify-cors";
 import helmet from "fastify-helmet";
 import cookie, { FastifyCookieOptions } from "fastify-cookie";
 import fastifyMongodb from "fastify-mongodb";
+import csrf from "fastify-csrf";
 
 interface OurFastifyInstance extends FastifyInstance {
   logger?: {
@@ -21,6 +22,11 @@ fastify.register(fastifyCors, {
 });
 
 fastify.register(helmet, {});
+
+fastify.register(csrf, {
+  sessionPlugin: "fastify-cookie",
+  // cookieOpts: { signed: true }
+});
 
 fastify.register(cookie, {
   // secret: process.env.secret,

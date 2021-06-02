@@ -16,6 +16,12 @@ fastify.register(autoLoad, {
   dirNameRoutePrefix: false,
 });
 
+fastify.addHook('preValidation', async (req, reply, payload) => {
+
+  
+    return payload
+}))
+
 fastify.get("/restricted", {}, async (request, reply) => {
   return { message: "restricted route hit" };
 });
@@ -41,7 +47,8 @@ start();
 // TODO ITEMS:
 // [X] - Plugins (cors, helmet, cookie parser, ioredis, )
 // [X] - Routes
-// [ ] - Figure out how to deal with mongo connection
+// [X] - Figure out how to deal with mongo connection
+// [ ] - Fastify-csrf plugin
 // [ ] - Auth / Cookies
 // [ ] - Figure out static file serving (Nginx, Caddy, traffic or serve static files with Fastify)
 // [ ] - Fastify with Apollog server
