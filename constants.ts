@@ -1,6 +1,9 @@
 import Fastify, { FastifyInstance, RouteShorthandOptions } from "fastify";
 import fastifyLog from "fastify-log";
 import fastifyCors from "fastify-cors";
+import helmet from "fastify-helmet";
+import cookie, { FastifyCookieOptions } from "fastify-cookie";
+import fastifyMongodb from "fastify-mongodb";
 
 interface OurFastifyInstance extends FastifyInstance {
   logger?: {
@@ -17,12 +20,24 @@ fastify.register(fastifyCors, {
   origin: true,
 });
 
+fastify.register(helmet, {});
+
+fastify.register(cookie, {
+  // secret: process.env.secret,
+  // parseOptions: {},
+} as FastifyCookieOptions);
+
 fastify.register(fastifyLog, {
   allInOne: true,
   timeFormat: "MM/dd/YY-HH:mm:ss ",
   info: "#58a6ff",
   warn: "#d9910b",
   error: "#fc7970",
+});
+
+fastify.register(fastifyMongodb, {
+  forceClose: true,
+  url: process.env.MONGO_STRING,
 });
 
 export const log = {
