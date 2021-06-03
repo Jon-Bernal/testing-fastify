@@ -18,20 +18,20 @@ export const fastify: OurFastifyInstance = Fastify();
 
 //! Make sure to change these for our production app
 fastify.register(fastifyCors, {
-  origin: true,
+  origin: ["https://studio.apollographql.com", "http://localhost:5000/graphql"],
 });
 
 fastify.register(helmet, {});
-
-fastify.register(csrf, {
-  sessionPlugin: "fastify-cookie",
-  // cookieOpts: { signed: true }
-});
 
 fastify.register(cookie, {
   // secret: process.env.secret,
   // parseOptions: {},
 } as FastifyCookieOptions);
+
+fastify.register(csrf, {
+  sessionPlugin: "fastify-cookie",
+  // cookieOpts: { signed: true }
+});
 
 fastify.register(fastifyLog, {
   allInOne: true,

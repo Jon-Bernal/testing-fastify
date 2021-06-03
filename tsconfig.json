@@ -23,5 +23,5 @@
     "resolveJsonModule": true,
     "baseUrl": "."
   },
-  "exclude": ["node_modules"]
-} // server
+  "exclude": ["node_modules", "client"]
+}
